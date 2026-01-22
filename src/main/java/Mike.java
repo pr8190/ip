@@ -27,25 +27,25 @@ public class Mike {
                 System.out.println("-------------------------------------\n");
             } else if (tr[0].equals("mark")) {
                 int k = Integer.parseInt(tr[1]);
-                str.get(k - 1).isDone = true;
                 System.out.println("-------------------------------------\nNice! I've marked this task as done: \n" + //
-                        str.get(k - 1) + //
+                        str.get(k - 1).markAsDone() + //
                         "\n-------------------------------------\n" + //
                         "");
             } else if (tr[0].equals("unmark")) {
                 int k = Integer.parseInt(tr[1]);
-                str.get(k - 1).isDone = false;
                 System.out.println(
                         "-------------------------------------\nOK, I've marked this task as not done yet: \n" + //
-                                str.get(k - 1) + //
+                                str.get(k - 1).markAsUndone() + //
                                 "\n-------------------------------------\n" + //
                                 "");
             } else {
-                System.out.println("-------------------------------------\nadded: " + //
-                        temp + //
-                        "\n-------------------------------------\n" + //
+                Task temTask = Task.classifyTask(temp);
+                str.add(temTask);
+                System.out.println("-------------------------------------\nGot it. I've added this task:\n" + //
+                        temTask + //
+                        "\nNow you have " + str.size() + " tasks in the list.\n-------------------------------------\n"
+                        + //
                         "");
-                str.add(new Task(temp));
             }
         }
     }
