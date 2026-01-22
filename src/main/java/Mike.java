@@ -39,6 +39,15 @@ public class Mike {
                                 "\n-------------------------------------\n" + //
                                 "");
             } else {
+                if (tr.length <= 1 && (tr[0].equals("todo") || tr[0].equals("deadline") || tr[0].equals("event"))) {
+                    System.out.println("-------------------------------------\nOOPS!!! The description of a " + tr[0]
+                            + " cannot be empty.\n-------------------------------------\n");
+                    continue;
+                } else if (tr.length <= 1) {
+                    System.out.println(
+                            "-------------------------------------\nOOPS!!! I'm sorry, but I don't know what that means :-(\n-------------------------------------\n");
+                    continue;
+                }
                 Task temTask = Task.classifyTask(temp);
                 str.add(temTask);
                 System.out.println("-------------------------------------\nGot it. I've added this task:\n" + //

@@ -28,6 +28,8 @@ public class Task {
 
     public static Task classifyTask(String temp) {
         String[] tr = temp.split(" ");
+        if (tr.length <= 1)
+            return null;
         if (tr[0].equals("todo"))
             return new Todo(temp.split("todo ")[1]);
         else if (tr[0].equals("deadline")) {
