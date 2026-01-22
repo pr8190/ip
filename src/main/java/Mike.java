@@ -26,17 +26,44 @@ public class Mike {
                     System.out.println((i + 1) + ". " + str.get(i) + "\n");
                 System.out.println("-------------------------------------\n");
             } else if (tr[0].equals("mark")) {
+                if (tr.length <= 1) {
+                    System.out.println("-------------------------------------\n" + //
+                            "Oops!!! The task to be marked is missing.\n-------------------------------------\n" + //
+                            "");
+                    continue;
+                }
                 int k = Integer.parseInt(tr[1]);
                 System.out.println("-------------------------------------\nNice! I've marked this task as done: \n" + //
                         str.get(k - 1).markAsDone() + //
                         "\n-------------------------------------\n" + //
                         "");
             } else if (tr[0].equals("unmark")) {
+                if (tr.length <= 1) {
+                    System.out.println("-------------------------------------\n" + //
+                            "Oops!!! The task to be unmarked is missing.\n-------------------------------------\n" + //
+                            "");
+                    continue;
+                }
                 int k = Integer.parseInt(tr[1]);
                 System.out.println(
                         "-------------------------------------\nOK, I've marked this task as not done yet: \n" + //
                                 str.get(k - 1).markAsUndone() + //
                                 "\n-------------------------------------\n" + //
+                                "");
+            } else if (tr[0].equals("delete")) {
+                if (tr.length <= 1) {
+                    System.out.println("-------------------------------------\n" + //
+                            "Oops!!! The task to be deleted is missing.\n-------------------------------------\n" + //
+                            "");
+                    continue;
+                }
+                int k = Integer.parseInt(tr[1]);
+                Task rem = str.remove(k - 1);
+                System.out.println(
+                        "-------------------------------------\nNoted. I've removed this task:\n" + //
+                                rem + //
+                                "\nNow you have " + str.size()
+                                + " tasks in the list.\n-------------------------------------\n" + //
                                 "");
             } else {
                 if (tr.length <= 1 && (tr[0].equals("todo") || tr[0].equals("deadline") || tr[0].equals("event"))) {

@@ -64,11 +64,42 @@ Here are the tasks in your list:
 -------------------------------------
 
 -------------------------------------
+Noted. I've removed this task:
+[T][X] read book
+Now you have 4 tasks in the list.
+-------------------------------------
+
+-------------------------------------
+Noted. I've removed this task:
+[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+Now you have 3 tasks in the list.
+-------------------------------------
+
+-------------------------------------
+Here are the tasks in your list: 
+
+1. [D][ ] return book (by: June 6th)
+
+2. [T][X] join sport club
+
+3. [T][ ] borrow book
+
+-------------------------------------
+
+-------------------------------------
 OOPS!!! The description of a todo cannot be empty.
 -------------------------------------
 
 -------------------------------------
 OOPS!!! I'm sorry, but I don't know what that means :-(
+-------------------------------------
+
+-------------------------------------
+Oops!!! The task to be marked is missing.
+-------------------------------------
+
+-------------------------------------
+Oops!!! The task to be deleted is missing.
 -------------------------------------
 
 -------------------------------------
