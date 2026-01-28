@@ -19,6 +19,7 @@ public class Mike {
             if (temp.equals("bye")) {
                 System.out.println(
                         "-------------------------------------\nBye. Hope to see you again soon!\n-------------------------------------\n");
+                sc.close();
                 break;
             } else if (temp.equals("list")) {
                 System.out.println("-------------------------------------\nHere are the tasks in your list: \n");
