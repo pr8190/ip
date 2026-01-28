@@ -45,7 +45,15 @@ public class Task {
         return null;
     }
 
+    public static Task taskFactory(String temp) {
+        String[] split = temp.split(" ", 2);
+        Task task = Task.classifyTask(split[1]);
+        if (split[0].equals("X"))
+            task.markAsDone();
+        return task;
+    }
+
     public String stringDescription() {
-        return this.toString();
+        return this.description;
     }
 }
