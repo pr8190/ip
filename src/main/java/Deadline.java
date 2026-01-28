@@ -12,7 +12,10 @@ public class Deadline extends Task {
                 + " (by: " + deadline + ")";
     }
 
-    public String StringDescription() {
-        return "deadline " + super.toString() + " /by " + deadline;
+    @Override
+    public String stringDescription() {
+        String status = super.getStatusIcon();
+        status = status.equals("X") ? status : "N";
+        return status + " deadline " + super.stringDescription() + " /by " + deadline;
     }
 }
