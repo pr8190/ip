@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    String deadline;
+    protected String deadline;
 
     Deadline(String description, String deadline) {
         super(description);
@@ -10,5 +10,12 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + deadline + ")";
+    }
+
+    @Override
+    public String stringDescription() {
+        String status = super.getStatusIcon();
+        status = status.equals("X") ? status : "N";
+        return status + " deadline " + super.stringDescription() + " /by " + deadline;
     }
 }
