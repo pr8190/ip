@@ -1,2 +1,4 @@
-todo readbook
-deadline return book /by June 6th
+N todo read book
+X deadline return book /by June 6th
+N event project meeting /from Aug 6th 2pm /to 4pm
+N event project meeting /from Aug 6th 2pm /to 4pm
