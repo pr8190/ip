@@ -9,7 +9,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
-    public String StringDescription() {
-        return "todo " + super.toString();
+    @Override
+    public String stringDescription() {
+        String status = super.getStatusIcon();
+        status = status.equals("X") ? status : "N";
+        return status + " todo " + super.stringDescription();
     }
 }
