@@ -44,4 +44,8 @@ public class Task {
         }
         return null;
     }
+
+    public String stringDescription() {
+        return this.toString();
+    }
 }
