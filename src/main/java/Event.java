@@ -14,7 +14,10 @@ public class Event extends Task {
                 + " (from: " + start + " to: " + end + ")";
     }
 
-    public String StringDescription() {
-        return "event " + super.toString() + " /from " + start + " /to " + end;
+    @Override
+    public String stringDescription() {
+        String status = super.getStatusIcon();
+        status = status.equals("X") ? status : "N";
+        return status + " event " + super.stringDescription() + " /from " + start + " /to " + end;
     }
 }
