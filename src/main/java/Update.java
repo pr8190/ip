@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public class Update {
-    public static void list(ArrayList<Task> tasks) {
+    public static void list(ArrayList<Task> tasks) { // updating the user on the number of tasks left
         System.out.println("-------------------------------------\nHere are the tasks in your list: \n");
         for (int i = 0; i < tasks.size(); i++)
             System.out.println((i + 1) + ". " + tasks.get(i) + "\n");
         System.out.println("-------------------------------------\n");
     }
 
-    public static void mark(ArrayList<Task> tasks, String mark) {
+    public static void mark(ArrayList<Task> tasks, String mark) { // updating the list to mark a task done
         if (mark.split(" ").length != 2) {
             System.out.println("-------------------------------------\n" + //
                     "Oops!!! The task to be marked is missing.\n-------------------------------------\n" + //
@@ -34,7 +34,7 @@ public class Update {
         }
     }
 
-    public static void unmark(ArrayList<Task> tasks, String unmark) {
+    public static void unmark(ArrayList<Task> tasks, String unmark) { // updating the list to unmark a task
         if (unmark.split(" ").length != 2) {
             System.out.println("-------------------------------------\n" + //
                     "Oops!!! The task to be unmarked is missing.\n-------------------------------------\n" + //
@@ -60,7 +60,7 @@ public class Update {
         }
     }
 
-    public static void delete(ArrayList<Task> tasks, String delete) {
+    public static void delete(ArrayList<Task> tasks, String delete) { // updating the list to delete a task
         if (delete.split(" ").length != 2) {
             System.out.println("-------------------------------------\n" + //
                     "Oops!!! The task to be deleted is missing.\n-------------------------------------\n" + //
