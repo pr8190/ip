@@ -83,19 +83,16 @@ public class Mike {
                             "-------------------------------------\nOOPS!!! I'm sorry, but I don't know what that means :-(\n-------------------------------------\n");
                     continue;
                 }
-                try {
-                    Task temTask = Task.classifyTask(temp);
-                    tasks.add(temTask);
-                    System.out.println("-------------------------------------\nGot it. I've added this task:\n" + //
-                            temTask + //
-                            "\nNow you have " + tasks.size()
-                            + " tasks in the list.\n-------------------------------------\n"
-                            + //
-                            "");
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(
-                            "-------------------------------------\nOOPS!!! Looks like there is an error.\n-------------------------------------\n");
-                }
+                Task temTask = Task.classifyTask(temp);
+                if (temTask == null)
+                    continue;
+                tasks.add(temTask);
+                System.out.println("-------------------------------------\nGot it. I've added this task:\n" + //
+                        temTask + //
+                        "\nNow you have " + tasks.size()
+                        + " tasks in the list.\n-------------------------------------\n"
+                        + //
+                        "");
             }
         }
     }

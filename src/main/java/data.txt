@@ -1,4 +1,4 @@
 N todo read book
-X deadline return book /by June 6th
-N event project meeting /from Aug 6th 2pm /to 4pm
-N event project meeting /from Aug 6th 2pm /to 4pm
+X deadline return book /by 2026-06-06
+X event project meeting /from 2026-08-06 14:00 /to 16:00
+N deadline project /by 2026-02-07

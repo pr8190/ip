@@ -1,3 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -27,22 +33,36 @@ public class Task {
     }
 
     public static Task classifyTask(String temp) {
-        String[] tr = temp.split(" ");
-        if (tr.length <= 1)
+        try {
+            String[] tr = temp.split(" ");
+            if (tr[0].equals("todo"))
+                return new Todo(temp.split("todo ")[1]);
+            else if (tr[0].equals("deadline")) {
+                String desc = temp.split("deadline ")[1].split(" /by ")[0];
+                LocalDate dd = LocalDate.parse(temp.split("deadline ")[1].split(" /by ")[1],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                return new Deadline(desc, dd);
+            } else if (tr[0].equals("event")) {
+                String desc = temp.split("event ")[1].split(" /from ")[0];
+                LocalDateTime s = LocalDateTime.parse(temp.split("event ")[1].split(" /from ")[1].split(" /to ")[0],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm"));
+                LocalTime e = LocalTime.parse(temp.split("event ")[1].split(" /from ")[1].split(" /to ")[1]);
+                return new Event(desc, s, e);
+            }
+            System.out.println(
+                    "-------------------------------------\nOOPS!!! There is an error in the format.(\n-------------------------------------\n");
             return null;
-        if (tr[0].equals("todo"))
-            return new Todo(temp.split("todo ")[1]);
-        else if (tr[0].equals("deadline")) {
-            String desc = temp.split("deadline ")[1].split(" /by ")[0];
-            String dd = temp.split("deadline ")[1].split(" /by ")[1];
-            return new Deadline(desc, dd);
-        } else if (tr[0].equals("event")) {
-            String desc = temp.split("event ")[1].split(" /from ")[0];
-            String s = temp.split("event ")[1].split(" /from ")[1].split(" /to ")[0];
-            String e = temp.split("event ")[1].split(" /from ")[1].split(" /to ")[1];
-            return new Event(desc, s, e);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(
+                    "-------------------------------------\nOOPS!!! Looks like there is an error in the format.\n-------------------------------------\n");
+            return null;
+        } catch (DateTimeParseException e) {
+            System.out.println(
+                    "-------------------------------------\nOOPS!!! Looks like there is an error in the format." +
+                            "\nFor Date : yyyy-MM-dd\nFor Time : HH:mm\nFor DateTime : yyyy-MM-dd HH:mm" +
+                            "\n-------------------------------------\n");
+            return null;
         }
-        return null;
     }
 
     public static Task taskFactory(String temp) {
