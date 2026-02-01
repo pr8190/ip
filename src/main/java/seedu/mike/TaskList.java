@@ -1,4 +1,5 @@
-package mike;
+package seedu.mike;
+
 import java.util.ArrayList;
 
 public class TaskList {

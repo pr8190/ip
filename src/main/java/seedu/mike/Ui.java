@@ -1,4 +1,4 @@
-package mike;
+package seedu.mike;
 
 import java.util.Scanner;
 

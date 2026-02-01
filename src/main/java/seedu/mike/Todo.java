@@ -1,4 +1,5 @@
-package mike;
+package seedu.mike;
+
 public class Todo extends Task {
 
     Todo(String description) {

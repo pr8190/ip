@@ -1,4 +1,5 @@
-package mike;
+package seedu.mike;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
