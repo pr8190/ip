@@ -3,18 +3,44 @@ package seedu.mike;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * The main class for the Mike chatbot application.
+ * Mike is a task management chatbot that helps users track their todos,
+ * deadlines, and events.
+ */
 public class Mike {
-    protected static String fileName = "./src/main/java/data.txt";
+
+    /** The default file path for storing task data. */
+    protected static String fileName = "./src/main/java/data/data.txt";
+
+    /** The user interface component for interacting with the user. */
     protected Ui ui;
+
+    /** The storage component for reading and writing task data. */
     protected Storage storage;
+
+    /** The task list that manages all updations. */
     protected TaskList taskList;
 
+    /**
+     * Constructs a Mike chatbot instance with the specified data file.
+     * Initializes the UI, storage, and task list components.
+     * 
+     * @param fileName The path to the file where tasks are stored
+     */
     public Mike(String fileName) {
         this.ui = new Ui();
         this.storage = new Storage(fileName);
-        taskList = new TaskList(storage.readFromFile(), ui);
+        taskList = new TaskList(storage.readFromFile());
     }
 
+    /**
+     * Runs the main loop of the Mike chatbot.
+     * Continuously reads user commands and executes them until the user enters
+     * "bye".
+     * Supported commands include: list, mark, unmark, delete, todo, deadline, and
+     * event.
+     */
     public void run() {
         ui.showWelcome();
         while (true) {
@@ -23,46 +49,47 @@ public class Mike {
             String[] commandSplit = command.split(" ");
             if (command.equals("bye")) { // When user inputs 'bye'
                 storage.writeToFile(taskList.loadTasks());
-                ui.showLine();
                 ui.showMessage("Bye. Hope to see you again soon!");
-                ui.showLine();
                 ui.close();
                 break;
             } else if (command.equals("list")) { // when user inputs 'list' and it lists out all the task in the
                                                  // arraylist
-                taskList.list();
+                ui.showMessage(taskList.list());
             } else if (commandSplit[0].equals("mark")) { // when user asks to mark a particular task as done
-                taskList.mark(command);
+                ui.showMessage(taskList.mark(command));
             } else if (commandSplit[0].equals("unmark")) { // when user asks to unmark a particular task
-                taskList.unmark(command);
+                ui.showMessage(taskList.unmark(command));
             } else if (commandSplit[0].equals("delete")) { // when user asks to delete a particular task from the list
-                taskList.delete(command);
+                ui.showMessage(taskList.delete(command));
             } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
                     || commandSplit[0].equals("event")) { // classifying tasks as todo, deadline or event and handling
                                                           // errors
                 if (commandSplit.length <= 1) {
-                    ui.showLine();
                     ui.showMessage("OOPS!!! The description of a " + commandSplit[0]
                             + " cannot be empty.\n");
-                    ui.showLine();
                     continue;
                 }
                 Task temTask = Task.classifyTask(command);
                 if (temTask == null)
                     continue;
                 taskList.add(temTask);
-                ui.showLine();
                 ui.showMessage("Got it. I've added this task:\n" + //
                         temTask + "\nNow you have " + taskList.size() + " tasks in the list.\n");
-                ui.showLine();
             } else {
-                ui.showLine();
                 ui.showMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-                ui.showLine();
             }
         }
     }
 
+    /**
+     * The main entry point for the Mike chatbot application.
+     * Creates a new Mike instance and runs it.
+     * 
+     * @param args Command line arguments (not used)
+     * @throws FileNotFoundException If the data file cannot be found
+     * @throws IOException           If there is an error reading or writing to the
+     *                               file
+     */
     public static void main(String[] args) throws FileNotFoundException, IOException {
         new Mike(fileName).run();
     }

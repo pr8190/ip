@@ -2,109 +2,141 @@ package seedu.mike;
 
 import java.util.ArrayList;
 
+/**
+ * Manages a list of tasks for the Mike chatbot.
+ * This class handles operations such as adding, deleting, marking, and listing
+ * tasks.
+ */
 public class TaskList {
+    /** The list of tasks managed by this TaskList. */
     protected ArrayList<Task> tasks;
-    protected Ui ui;
 
-    public TaskList(ArrayList<Task> tasks, Ui ui) {
+    /** The minimum number of parts expected when splitting a command string. */
+    private static final int MIN_SPLITS = 2;
+
+    /**
+     * Constructs a TaskList with the given list of tasks.
+     * 
+     * @param tasks The initial list of tasks to be managed
+     */
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-        this.ui = ui;
     }
 
+    /**
+     * Returns the ArrayList of tasks currently in the task list.
+     * 
+     * @return The ArrayList containing all tasks
+     */
     public ArrayList<Task> loadTasks() {
         return this.tasks;
     }
 
-    public void list() { // updating the user on the number of tasks left
-        System.out.println("-------------------------------------\nHere are the tasks in your list: \n");
+    /**
+     * Returns a formatted string representation of all tasks in the list.
+     * Each task is numbered and displayed on a separate line.
+     * 
+     * @return A string containing all tasks with their numbers, or a header message
+     *         if the list is displayed
+     */
+    public String list() {
+        StringBuilder stringBuilder = new StringBuilder().append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++)
-            System.out.println((i + 1) + ". " + tasks.get(i) + "\n");
-        ui.showLine();
+            stringBuilder.append((i + 1) + ". " + tasks.get(i) + "\n");
+        return stringBuilder.toString();
     }
 
-    public void mark(String mark) { // updating the list to mark a task done
-        if (mark.split(" ").length != 2) {
-            ui.showLine();
-            ui.showError("Oops!!! The task to be marked is missing.\n");
-            ui.showLine();
-            return;
+    /**
+     * Marks a task as done based on the given command string.
+     * The command should be in the format "mark INDEX" where INDEX is a 1-based
+     * task number.
+     * 
+     * @param mark The mark command string (e.g., "mark 2")
+     * @return A message indicating success or describing the error that occurred
+     */
+    public String mark(String mark) {
+        if (mark.split(" ").length != MIN_SPLITS) {
+            return "Oops!!! The task to be marked is missing.\n";
         }
         try {
             int index = Integer.parseInt(mark.split(" ")[1]);
             if (index > tasks.size()) {
-                ui.showLine();
-                ui.showError("Oops!!! Index out of Range.\n");
-                ui.showLine();
+                return "Oops!!! Index out of Range.\n";
             } else {
-                ui.showLine();
-                ui.showMessage("Nice! I've marked this task as done: \n" + //
-                        tasks.get(index - 1).markAsDone() + "\n");
-                ui.showLine();
+                return "Nice! I've marked this task as done: \n" + //
+                        tasks.get(index - 1).markAsDone() + "\n";
             }
         } catch (NumberFormatException e) {
-            ui.showLine();
-            ui.showError("Oops!!! Not a valid number.\n");
-            ui.showLine();
+            return "Oops!!! Not a valid number.\n";
         }
     }
 
-    public void unmark(String unmark) { // updating the list to unmark a task
-        if (unmark.split(" ").length != 2) {
-            ui.showLine();
-            ui.showError("Oops!!! The task to be unmarked is missing.\n");
-            ui.showLine();
-            return;
+    /**
+     * Marks a task as not done based on the given command string.
+     * The command should be in the format "unmark INDEX" where INDEX is a 1-based
+     * task number.
+     * 
+     * @param unmark The unmark command string (e.g., "unmark 2")
+     * @return A message indicating success or describing the error that occurred
+     */
+    public String unmark(String unmark) {
+        if (unmark.split(" ").length != MIN_SPLITS) {
+            return "Oops!!! The task to be unmarked is missing.\n";
         }
         try {
             int index = Integer.parseInt(unmark.split(" ")[1]);
             if (index > tasks.size()) {
-                ui.showLine();
-                ui.showError("Oops!!! Index out of Range.\n");
-                ui.showLine();
+                return "Oops!!! Index out of Range.\n";
             } else {
-                ui.showLine();
-                ui.showMessage("Ok! I've unmarked this task: \n" + //
-                        tasks.get(index - 1).markAsUndone() + "\n");
-                ui.showLine();
+                return "Ok! I've unmarked this task: \n" + //
+                        tasks.get(index - 1).markAsUndone() + "\n";
             }
         } catch (NumberFormatException e) {
-            ui.showLine();
-            ui.showError("Oops!!! Not a valid number.\n");
-            ui.showLine();
+            return "Oops!!! Not a valid number.\n";
         }
     }
 
-    public void delete(String delete) { // updating the list to delete a task
-        if (delete.split(" ").length != 2) {
-            ui.showLine();
-            ui.showError("Oops!!! The task to be deleted is missing.\n");
-            ui.showLine();
-            return;
+    /**
+     * Deletes a task from the list based on the given command string.
+     * The command should be in the format "delete INDEX" where INDEX is a 1-based
+     * task number.
+     * 
+     * @param delete The delete command string (e.g., "delete 2")
+     * @return A message indicating the deleted task and the new list size, or an
+     *         error message
+     */
+    public String delete(String delete) {
+        if (delete.split(" ").length != MIN_SPLITS) {
+            return "Oops!!! The task to be deleted is missing.\n";
         }
         try {
             int index = Integer.parseInt(delete.split(" ")[1]);
             if (index > tasks.size()) {
-                ui.showLine();
-                ui.showError("Oops!!! Index out of Range.\n");
-                ui.showLine();
+                return "Oops!!! Index out of Range.\n";
             } else {
                 Task rem = tasks.remove(index - 1);
-                ui.showLine();
-                ui.showMessage("Noted. I've removed this task:\n" + //
-                        rem + "\nNow you have " + tasks.size() + " tasks in the list.\n");
-                ui.showLine();
+                return "Noted. I've removed this task:\n" + //
+                        rem + "\nNow you have " + tasks.size() + " tasks in the list.\n";
             }
         } catch (NumberFormatException e) {
-            ui.showLine();
-            ui.showError("Oops!!! Not a valid number.\n");
-            ui.showLine();
+            return "Oops!!! Not a valid number.\n";
         }
     }
 
+    /**
+     * Adds a new task to the task list.
+     * 
+     * @param task The task to be added to the list
+     */
     public void add(Task task) {
         this.tasks.add(task);
     }
 
+    /**
+     * Returns the number of tasks currently in the list.
+     * 
+     * @return The size of the task list
+     */
     public int size() {
         return this.tasks.size();
     }

@@ -6,15 +6,35 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task with a description and completion status.
+ * This is the base class for different types of tasks (Todo, Deadline, Event).
+ * Tasks can be marked as done or undone, and can be converted to/from string
+ * format for storage.
+ */
 public class Task {
+    /** The description of the task. */
     protected String description;
+
+    /** The completion status of the task (true if done, false otherwise). */
     protected boolean isDone;
 
+    /**
+     * Constructs a new Task with the given description.
+     * The task is initially marked as not done.
+     * 
+     * @param description The description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns the status icon representing whether the task is done.
+     * 
+     * @return "X" if the task is done, " " (space) if not done
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -24,16 +44,39 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Marks the task as done.
+     * 
+     * @return The string representation of the task after marking it as done
+     */
     public String markAsDone() {
         isDone = true;
         return this.toString();
     }
 
+    /**
+     * Marks the task as undone.
+     * 
+     * @return The string representation of the task after marking it as undone
+     */
     public String markAsUndone() {
         isDone = false;
         return this.toString();
     }
 
+    /**
+     * Creates a Task object from a command string.
+     * Parses the command to determine the task type (todo, deadline, or event)
+     * and creates the appropriate Task subclass.
+     * 
+     * Expected formats:
+     * - Todo: "todo DESCRIPTION"
+     * - Deadline: "deadline DESCRIPTION /by yyyy-MM-dd"
+     * - Event: "event DESCRIPTION /from yyyy-MM-dd HH:mm /to HH:mm"
+     * 
+     * @param temp The command string to parse
+     * @return A Task object (Todo, Deadline, or Event), or null if parsing fails
+     */
     public static Task classifyTask(String temp) {
         try {
             String[] tr = temp.split(" ");
@@ -67,6 +110,16 @@ public class Task {
         }
     }
 
+    /**
+     * Creates a Task object from its stored string format.
+     * The stored format includes the completion status followed by the task
+     * details.
+     * This method is used when reading tasks from the storage file.
+     * 
+     * @param temp The stored string representation of the task (e.g., "X todo read
+     *             book")
+     * @return A Task object with the appropriate completion status
+     */
     public static Task taskFactory(String temp) {
         String[] split = temp.split(" ", 2);
         Task task = Task.classifyTask(split[1]);
@@ -75,6 +128,12 @@ public class Task {
         return task;
     }
 
+    /**
+     * Returns the description of the task.
+     * This method is used when saving tasks to the storage file.
+     * 
+     * @return The task description
+     */
     public String stringDescription() {
         return this.description;
     }

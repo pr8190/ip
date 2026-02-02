@@ -1,7 +1,16 @@
 package seedu.mike;
 
+/**
+ * represents a task that is to be completed with no specific completion date or
+ * time
+ */
 public class Todo extends Task {
 
+    /**
+     * creates a todo task
+     * 
+     * @param description
+     */
     Todo(String description) {
         super(description);
     }

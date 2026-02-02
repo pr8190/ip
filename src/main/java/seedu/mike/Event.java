@@ -4,10 +4,23 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that is an event which has a start time and an end time
+ */
 public class Event extends Task {
+    /** Stores the start time of the event in the format yyyy-MM-dd HH:mm */
     protected LocalDateTime start;
+
+    /** Stores the end time of the event in the format HH:mm */
     protected LocalTime end;
 
+    /**
+     * Creates a new Event object
+     * 
+     * @param description
+     * @param start
+     * @param end
+     */
     Event(String description, LocalDateTime start, LocalTime end) {
         super(description);
         this.start = start;
