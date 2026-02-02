@@ -140,4 +140,30 @@ public class TaskList {
     public int size() {
         return this.tasks.size();
     }
+
+    /**
+     * Returns the tasks that contains the keyword inputted by the user.
+     * 
+     * @return The tasks that has the given keyword from the user
+     */
+    public String find(String find) {
+        if (find.split(" ").length != MIN_SPLITS) {
+            return "Oops!!! The keyword for the tasks to be found is missing.\n";
+        }
+        try {
+            StringBuilder stringBuilder = new StringBuilder().append("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                String[] parsedDescription = tasks.get(i).getDescription().split(" ");
+                for (String string : parsedDescription) {
+                    if (string.equals(find.split(" ")[1])) {
+                        stringBuilder.append((i + 1) + ". " + tasks.get(i) + "\n");
+                    }
+                }
+            }
+            return stringBuilder.toString();
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            return "Oops!!!There is an error in the format\n";
+        }
+
+    }
 }

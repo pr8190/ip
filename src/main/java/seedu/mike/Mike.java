@@ -61,6 +61,8 @@ public class Mike {
                 ui.showMessage(taskList.unmark(command));
             } else if (commandSplit[0].equals("delete")) { // when user asks to delete a particular task from the list
                 ui.showMessage(taskList.delete(command));
+            } else if (commandSplit[0].equals("find")) {
+                ui.showMessage(taskList.find(command));
             } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
                     || commandSplit[0].equals("event")) { // classifying tasks as todo, deadline or event and handling
                                                           // errors
