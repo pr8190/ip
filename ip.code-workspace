@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"src/main/java",
+			"src"
+		],
+		"java.project.referencedLibraries": []
+	}
+}
