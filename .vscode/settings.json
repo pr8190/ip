@@ -1,7 +1,8 @@
 {
   "java.jdt.ls.java.home": "",
   "java.project.sourcePaths": [
-    "src/main/java"
+    "src/main/java",
+    "src"
   ],
   "java.project.referencedLibraries": []
 }
