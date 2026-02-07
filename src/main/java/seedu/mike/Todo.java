@@ -8,7 +8,7 @@ public class Todo extends Task {
 
     /**
      * creates a todo task
-     * 
+     *
      * @param description
      */
     Todo(String description) {

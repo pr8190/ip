@@ -19,7 +19,7 @@ public class Storage {
 
     /**
      * Constructs a Storage object with the specified file path.
-     * 
+     *
      * @param fileName The path to the file where tasks will be stored
      */
     public Storage(String fileName) {
@@ -32,7 +32,7 @@ public class Storage {
      * is printed.
      * Each line in the file is converted into a Task object using the Task factory
      * method.
-     * 
+     *
      * @return An ArrayList containing all tasks read from the file, or an empty
      *         list if file not found
      */
@@ -58,7 +58,7 @@ public class Storage {
      * Writes the given list of tasks to the storage file.
      * Each task is written on a new line using its string representation.
      * If an IOException occurs, an error message is printed.
-     * 
+     *
      * @param tasks The ArrayList of tasks to be written to the file
      */
     public void writeToFile(ArrayList<Task> tasks) {
@@ -66,10 +66,11 @@ public class Storage {
             FileWriter fw = new FileWriter(fileName);
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
-                if (i == 0)
+                if (i == 0) {
                     sb.append(tasks.get(i).stringDescription());
-                else
+                } else {
                     sb.append(System.lineSeparator() + tasks.get(i).stringDescription());
+                }
             }
             fw.write(sb.toString());
             fw.close();

@@ -25,7 +25,7 @@ public class Mike {
     /**
      * Constructs a Mike chatbot instance with the specified data file.
      * Initializes the UI, storage, and task list components.
-     * 
+     *
      * @param fileName The path to the file where tasks are stored
      */
     public Mike(String fileName) {
@@ -52,8 +52,7 @@ public class Mike {
                 ui.showMessage("Bye. Hope to see you again soon!");
                 ui.close();
                 break;
-            } else if (command.equals("list")) { // when user inputs 'list' and it lists out all the task in the
-                                                 // arraylist
+            } else if (command.equals("list")) { // when user inputs 'list'
                 ui.showMessage(taskList.list());
             } else if (commandSplit[0].equals("mark")) { // when user asks to mark a particular task as done
                 ui.showMessage(taskList.mark(command));
@@ -64,19 +63,20 @@ public class Mike {
             } else if (commandSplit[0].equals("find")) {
                 ui.showMessage(taskList.find(command));
             } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
-                    || commandSplit[0].equals("event")) { // classifying tasks as todo, deadline or event and handling
-                                                          // errors
+                    || commandSplit[0].equals("event")) {
+                // classifying tasks as todo, deadline or event and handling errors
                 if (commandSplit.length <= 1) {
                     ui.showMessage("OOPS!!! The description of a " + commandSplit[0]
                             + " cannot be empty.\n");
                     continue;
                 }
                 Task temTask = Task.classifyTask(command);
-                if (temTask == null)
+                if (temTask == null) {
                     continue;
+                }
                 taskList.add(temTask);
-                ui.showMessage("Got it. I've added this task:\n" + //
-                        temTask + "\nNow you have " + taskList.size() + " tasks in the list.\n");
+                ui.showMessage("Got it. I've added this task:\n" + temTask
+                        + "\nNow you have " + taskList.size() + " tasks in the list.\n");
             } else {
                 ui.showMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
@@ -86,7 +86,7 @@ public class Mike {
     /**
      * The main entry point for the Mike chatbot application.
      * Creates a new Mike instance and runs it.
-     * 
+     *
      * @param args Command line arguments (not used)
      * @throws FileNotFoundException If the data file cannot be found
      * @throws IOException           If there is an error reading or writing to the

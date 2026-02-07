@@ -51,7 +51,7 @@ public class Ui {
 
     /**
      * Reads a command from the user via the console.
-     * 
+     *
      * @return The command string entered by the user
      */
     public String readCommand() {
@@ -60,7 +60,7 @@ public class Ui {
 
     /**
      * Displays a message to the user.
-     * 
+     *
      * @param message The message to be displayed
      */
     public void showMessage(String message) {

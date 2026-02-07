@@ -16,7 +16,7 @@ public class Event extends Task {
 
     /**
      * Creates a new Event object
-     * 
+     *
      * @param description
      * @param start
      * @param end
@@ -30,8 +30,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + start.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + " to: " +
-                end + ")";
+                + " (from: " + start.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + " to: "
+                + end + ")";
     }
 
     @Override

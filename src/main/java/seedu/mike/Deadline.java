@@ -1,11 +1,11 @@
 package seedu.mike;
 
-/**
-*represents a task that has a deadline
-*/
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * represents a task that has a deadline
+ */
 public class Deadline extends Task {
 
     /** Stores the deadline of the event in the format yyyy-MM-dd */
@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline Task
-     * 
+     *
      * @param description The task description
      * @param deadline    the task deadline
      */

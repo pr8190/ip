@@ -1,10 +1,8 @@
 package seedu.mike;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.beans.Transient;
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
