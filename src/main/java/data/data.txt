@@ -3,3 +3,4 @@ N deadline return book /by 2026-06-06
 N event project meeting /from 2026-08-06 14:00 /to 16:00
 N deadline project /by 2026-02-07
 N event birthday part /from 2026-02-13 18:00 /to 23:00
+N todo sleep
