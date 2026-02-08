@@ -95,4 +95,43 @@ public class Mike {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         new Mike(fileName).run();
     }
+
+    public String getResponse(String command) {
+        String[] commandSplit = command.split(" ");
+        if (command.equals("bye")) { // When user inputs 'bye'
+            storage.writeToFile(taskList.loadTasks());
+            ui.close();
+            return "Bye. Hope to see you again soon!";
+        } else if (command.equalsIgnoreCase("hi") || command.equalsIgnoreCase("hello")) {
+            return "Hello! I am Mike - your personal chatbot for remembering tasks. These are the basic functionalities I can perform : "
+                    + "\n1. Adding todo tasks\n2. Adding deadline tasks\n3. Adding event tasks\n4. Listing all the tasks"
+                    + "\n5. Marking a tasks done\n6. Unmarking a task\n7. Deleting a task\n8. Finding tasks that matches the inputted keyword";
+        } else if (command.equals("list")) { // when user inputs 'list'
+            return taskList.list();
+        } else if (commandSplit[0].equals("mark")) { // when user asks to mark a particular task as done
+            return taskList.mark(command);
+        } else if (commandSplit[0].equals("unmark")) { // when user asks to unmark a particular task
+            return taskList.unmark(command);
+        } else if (commandSplit[0].equals("delete")) { // when user asks to delete a particular task from the list
+            return taskList.delete(command);
+        } else if (commandSplit[0].equals("find")) {
+            return taskList.find(command);
+        } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
+                || commandSplit[0].equals("event")) {
+            // classifying tasks as todo, deadline or event and handling errors
+            if (commandSplit.length <= 1) {
+                return "OOPS!!! The description of a " + commandSplit[0]
+                        + " cannot be empty.\n";
+            }
+            Task temTask = Task.classifyTask(command);
+            if (temTask == null) {
+                return "Oops!!! Looks like there is an error";
+            }
+            taskList.add(temTask);
+            return "Got it. I've added this task:\n" + temTask
+                    + "\nNow you have " + taskList.size() + " tasks in the list.\n";
+        } else {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        }
+    }
 }
