@@ -13,7 +13,7 @@ public class MikeException extends Exception {
      *
      * @param exception
      */
-    MikeException(String exception) {
+    public MikeException(String exception) {
         this.exception = exception;
     }
 

@@ -3,6 +3,8 @@ package seedu.mike;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import exception.MikeException;
+
 /**
  * The main class for the Mike chatbot application.
  * Mike is a task management chatbot that helps users track their todos,
@@ -70,14 +72,15 @@ public class Mike {
                             + " cannot be empty.\n");
                     continue;
                 }
-                Task temTask = Task.classifyTask(command);
-                assert temTask != null;
-                if (temTask == null) {
-                    continue;
+                try {
+                    Task temTask = Task.classifyTask(command);
+                    assert temTask != null;
+                    taskList.add(temTask);
+                    ui.showMessage("Got it. I've added this task:\n" + temTask
+                            + "\nNow you have " + taskList.size() + " tasks in the list.\n");
+                } catch (MikeException mikeException) {
+                    ui.showMessage(mikeException.toString());
                 }
-                taskList.add(temTask);
-                ui.showMessage("Got it. I've added this task:\n" + temTask
-                        + "\nNow you have " + taskList.size() + " tasks in the list.\n");
             } else {
                 ui.showMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
@@ -133,13 +136,17 @@ public class Mike {
                 return "OOPS!!! The description of a " + commandSplit[0]
                         + " cannot be empty.\n";
             }
-            Task temTask = Task.classifyTask(command);
-            if (temTask == null) {
-                return "Oops!!! Looks like there is an error";
+            try {
+                Task temTask = Task.classifyTask(command);
+                if (temTask == null) {
+                    return "Oops!!! Looks like there is an error";
+                }
+                taskList.add(temTask);
+                return "Got it. I've added this task:\n" + temTask
+                        + "\nNow you have " + taskList.size() + " tasks in the list.\n";
+            } catch (MikeException mikeException) {
+                return mikeException.toString();
             }
-            taskList.add(temTask);
-            return "Got it. I've added this task:\n" + temTask
-                    + "\nNow you have " + taskList.size() + " tasks in the list.\n";
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }

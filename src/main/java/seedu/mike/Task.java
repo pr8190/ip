@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import exception.MikeException;
+
 /**
  * Represents a task with a description and completion status.
  * This is the base class for different types of tasks (Todo, Deadline, Event).
@@ -81,7 +83,7 @@ public class Task {
      * @param temp The command string to parse
      * @return A Task object (Todo, Deadline, or Event), or null if parsing fails
      */
-    public static Task classifyTask(String temp) {
+    public static Task classifyTask(String temp) throws MikeException {
         // temp is the command inputted by the user.
         try {
             String[] tr = temp.split(" "); // tr is a temporary array
@@ -100,22 +102,19 @@ public class Task {
                 LocalTime e = LocalTime.parse(temp.split("event ")[1].split(" /from ")[1].split(" /to ")[1]);
                 return new Event(desc, s, e);
             }
-            System.out.println("-------------------------------------\n"
+            throw new MikeException("-------------------------------------\n"
                     + "OOPS!!! There is an error in the format.(\n"
                     + "-------------------------------------\n");
-            return null;
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(
+            throw new MikeException(
                     "-------------------------------------\n"
                             + "OOPS!!! Looks like there is an error in the format.\n"
                             + "-------------------------------------\n");
-            return null;
         } catch (DateTimeParseException e) {
-            System.out.println(
+            throw new MikeException(
                     "-------------------------------------\nOOPS!!! Looks like there is an error in the format."
                             + "\nFor Date : yyyy-MM-dd\nFor Time : HH:mm\nFor DateTime : yyyy-MM-dd HH:mm"
                             + "\n-------------------------------------\n");
-            return null;
         }
     }
 
@@ -131,12 +130,16 @@ public class Task {
      */
     public static Task taskFactory(String temp) {
         String[] split = temp.split(" ", 2);
-        Task task = Task.classifyTask(split[1]);
-        assert task != null;
-        if (split[0].equals("X")) {
-            task.markAsDone();
+        try {
+            Task task = Task.classifyTask(split[1]);
+            assert task != null;
+            if (split[0].equals("X")) {
+                task.markAsDone();
+            }
+            return task;
+        } catch (MikeException mikeException) {
+            return null;
         }
-        return task;
     }
 
     /**
