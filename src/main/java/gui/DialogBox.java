@@ -3,18 +3,25 @@ package gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * The dialogbox class
+ */
 public class DialogBox extends HBox {
-
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * DialogBox constructor
+     *
+     * @param s string
+     * @param i image
+     */
     public DialogBox(String s, Image i) {
         text = new Label(s);
         displayPicture = new ImageView(i);
@@ -27,6 +34,9 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 
+    /**
+     * flips the positioning of the image and the string in the chat
+     */
     public void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());

@@ -71,6 +71,7 @@ public class Mike {
                     continue;
                 }
                 Task temTask = Task.classifyTask(command);
+                assert temTask != null;
                 if (temTask == null) {
                     continue;
                 }
@@ -99,7 +100,7 @@ public class Mike {
     /**
      * To get the response when user inputs a string in the Mike application.
      *
-     * @param String input provided by the user
+     * @param command string input provided by the user
      * @return String response for the inputted string
      */
     public String getResponse(String command) {
@@ -109,9 +110,12 @@ public class Mike {
             ui.close();
             return "Bye. Hope to see you again soon!";
         } else if (command.equalsIgnoreCase("hi") || command.equalsIgnoreCase("hello")) {
-            return "Hello! I am Mike - your personal chatbot for remembering tasks. These are the basic functionalities I can perform : "
-                    + "\n1. Adding todo tasks\n2. Adding deadline tasks\n3. Adding event tasks\n4. Listing all the tasks"
-                    + "\n5. Marking a tasks done\n6. Unmarking a task\n7. Deleting a task\n8. Finding tasks that matches the inputted keyword";
+            return "Hello! I am Mike - your personal chatbot for remembering tasks."
+                    + " These are the basic functionalities I can perform : "
+                    + "\n1. Adding todo tasks\n2. Adding deadline tasks"
+                    + "\n3. Adding event tasks\n4. Listing all the tasks"
+                    + "\n5. Marking a tasks done\n6. Unmarking a task"
+                    + "\n7. Deleting a task\n8. Finding tasks that matches the inputted keyword";
         } else if (command.equals("list")) { // when user inputs 'list'
             return taskList.list();
         } else if (commandSplit[0].equals("mark")) { // when user asks to mark a particular task as done

@@ -40,9 +40,11 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File f = new File(fileName);
+            assert f.toString().equals(fileName);
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
                 Task temTask = Task.taskFactory(sc.nextLine());
+                assert temTask != null;
                 tasks.add(temTask);
             }
             sc.close();

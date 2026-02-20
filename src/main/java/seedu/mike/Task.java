@@ -82,8 +82,10 @@ public class Task {
      * @return A Task object (Todo, Deadline, or Event), or null if parsing fails
      */
     public static Task classifyTask(String temp) {
+        // temp is the command inputted by the user.
         try {
-            String[] tr = temp.split(" ");
+            String[] tr = temp.split(" "); // tr is a temporary array
+            // desc is the description
             if (tr[0].equals("todo")) {
                 return new Todo(temp.split("todo ")[1]);
             } else if (tr[0].equals("deadline")) {
@@ -130,6 +132,7 @@ public class Task {
     public static Task taskFactory(String temp) {
         String[] split = temp.split(" ", 2);
         Task task = Task.classifyTask(split[1]);
+        assert task != null;
         if (split[0].equals("X")) {
             task.markAsDone();
         }
