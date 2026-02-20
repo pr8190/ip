@@ -115,10 +115,15 @@ public class Mike {
         } else if (command.equalsIgnoreCase("hi") || command.equalsIgnoreCase("hello")) {
             return "Hello! I am Mike - your personal chatbot for remembering tasks."
                     + " These are the basic functionalities I can perform : "
-                    + "\n1. Adding todo tasks\n2. Adding deadline tasks"
-                    + "\n3. Adding event tasks\n4. Listing all the tasks"
-                    + "\n5. Marking a tasks done\n6. Unmarking a task"
-                    + "\n7. Deleting a task\n8. Finding tasks that matches the inputted keyword";
+                    + "\n1. Adding todo tasks format : todo <task>"
+                    + "\n2. Adding deadline tasks format : deadline <task> /by yyyy:MM:dd"
+                    + "\n3. Adding event tasks format : event <task> /from yyyy:MM:dd HH:mm /to HH:mm"
+                    + "\n4. Listing all the tasks format : list"
+                    + "\n5. Marking a tasks done format : mark <number>"
+                    + "\n6. Unmarking a task format : unmark <number>"
+                    + "\n7. Deleting a task format : delete <number>"
+                    + "\n8. Finding tasks that matches the inputted keyword format : find <keyword>"
+                    + "\n9. Exit format : bye";
         } else if (command.equals("list")) { // when user inputs 'list'
             return taskList.list();
         } else if (commandSplit[0].equals("mark")) { // when user asks to mark a particular task as done

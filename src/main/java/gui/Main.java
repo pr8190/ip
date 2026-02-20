@@ -1,9 +1,13 @@
 package gui;
 
+// Remove the incorrect import
+// import com.azul.crs.internal.asm.Label;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label; // Correct import for Label
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -72,6 +76,8 @@ public class Main extends Application {
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
+        Label messageLabel = new Label("Type 'hello' to understand the chatbot features");
+        messageLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: gray;");
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -80,7 +86,12 @@ public class Main extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        // Position the label below the userInput and sendButton
+        AnchorPane.setLeftAnchor(messageLabel, 1.0);
+        AnchorPane.setBottomAnchor(messageLabel, 30.0); // Adjust the value to position it below the input and button
+
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, messageLabel);
 
         scene = new Scene(mainLayout);
 
