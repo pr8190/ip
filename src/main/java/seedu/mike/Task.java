@@ -102,19 +102,14 @@ public class Task {
                 LocalTime e = LocalTime.parse(temp.split("event ")[1].split(" /from ")[1].split(" /to ")[1]);
                 return new Event(desc, s, e);
             }
-            throw new MikeException("-------------------------------------\n"
-                    + "OOPS!!! There is an error in the format.(\n"
-                    + "-------------------------------------\n");
+            throw new MikeException("OOPS!!! There is an error in the format.");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MikeException(
-                    "-------------------------------------\n"
-                            + "OOPS!!! Looks like there is an error in the format.\n"
-                            + "-------------------------------------\n");
+                    "OOPS!!! Looks like there is an error in the format.");
         } catch (DateTimeParseException e) {
             throw new MikeException(
-                    "-------------------------------------\nOOPS!!! Looks like there is an error in the format."
-                            + "\nFor Date : yyyy-MM-dd\nFor Time : HH:mm\nFor DateTime : yyyy-MM-dd HH:mm"
-                            + "\n-------------------------------------\n");
+                    "OOPS!!! Looks like there is an error in the format."
+                            + "\nFor Date : yyyy-MM-dd\nFor Time : HH:mm\nFor DateTime : yyyy-MM-dd HH:mm");
         }
     }
 

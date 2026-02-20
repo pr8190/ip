@@ -14,4 +14,26 @@ public class TodoTest {
         assertEquals("N todo product testing", new Todo("product testing").stringDescription());
     }
 
+    @Test
+    public void markAsDoneTest() {
+        Todo todo = new Todo("read book");
+        todo.markAsDone();
+        assertEquals("[T][X] read book", todo.toString());
+    }
+
+    @Test
+    public void markAsNotDoneTest() {
+        Todo todo = new Todo("read book");
+        todo.markAsDone();
+        todo.markAsUndone();
+        assertEquals("[T][ ] read book", todo.toString());
+    }
+
+    @Test
+    public void toStringTest() {
+        Todo todo = new Todo("read book");
+        assertEquals("[T][ ] read book", todo.toString());
+        todo.markAsDone();
+        assertEquals("[T][X] read book", todo.toString());
+    }
 }
