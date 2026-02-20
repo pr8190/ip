@@ -11,11 +11,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import seedu.mike.Mike;
 
+/**
+ * Main class
+ */
 public class Main extends Application {
 
+    private static String fileName = "./src/main/java/data/data.txt";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -24,8 +27,8 @@ public class Main extends Application {
     private Image userImage = new Image(
             "https://cdn-icons-png.flaticon.com/512/9187/9187532.png");
     private Image mikeImage = new Image(
-            "https://img.freepik.com/free-vector/chatbot-chat-message-vectorart_78370-4104.jpg?semt=ais_hybrid&w=740&q=80");
-    private static String fileName = "./src/main/java/data/data.txt";
+            "https://img.freepik.com/free-vector/chatbot-chat"
+                    + "-message-vectorart_78370-4104.jpg?semt=ais_hybrid&w=740&q=80");
     private Mike mike = new Mike(fileName);
 
     @Override
@@ -87,6 +90,9 @@ public class Main extends Application {
         // More code to be added here later
     }
 
+    /**
+     * Handles the user input
+     */
     private void handleUserInput() {
         String userText = userInput.getText();
         String mikeText = mike.getResponse(userInput.getText());
