@@ -96,6 +96,12 @@ public class Mike {
         new Mike(fileName).run();
     }
 
+    /**
+     * To get the response when user inputs a string in the Mike application.
+     *
+     * @param String input provided by the user
+     * @return String response for the inputted string
+     */
     public String getResponse(String command) {
         String[] commandSplit = command.split(" ");
         if (command.equals("bye")) { // When user inputs 'bye'
