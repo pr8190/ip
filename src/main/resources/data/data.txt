@@ -1,0 +1,6 @@
+N event project meeting /from 2026-08-06 14:00 /to 16:00
+X todo sleep
+N todo buy books
+N event birthday party /from 2026-02-28 18:00 /to 21:00
+N deadline feature list /by 2026-02-22
+N event project meeting /from 2026-02-23 18:00 /to 21:00
