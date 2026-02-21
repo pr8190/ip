@@ -167,4 +167,35 @@ public class TaskList {
         }
 
     }
+
+    /**
+     * Provides a list of upcoming deadlines and events that are due or happening
+     * within the next 3 days.
+     * This method checks all tasks in the task list and identifies those that are
+     * either deadlines
+     * or events occurring within the next 3 days.
+     *
+     * @return A string containing the list of upcoming deadlines and events within
+     *         3 days
+     */
+    public String reminders() {
+        int count = 0;
+        StringBuilder stringBuilder = new StringBuilder().append("Upcoming deadlines (within 3 days):\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i) instanceof Deadline) {
+                Deadline deadline = (Deadline) tasks.get(i);
+                if (deadline.isDueSoon()) {
+                    stringBuilder.append((count + 1) + ". " + tasks.get(i) + "\n");
+                    count++;
+                }
+            } else if (tasks.get(i) instanceof Event) {
+                Event event = (Event) tasks.get(i);
+                if (event.isHappeningSoon()) {
+                    stringBuilder.append((count + 1) + ". " + tasks.get(i) + "\n");
+                    count++;
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
 }
