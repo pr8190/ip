@@ -35,4 +35,14 @@ public class Deadline extends Task {
         return status + " deadline " + super.stringDescription() + " /by "
                 + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
+
+    /**
+     * Checks if the deadline is due within the next 3 days.
+     *
+     * @return true if the deadline is within the next 3 days, false otherwise
+     */
+    public boolean isDueSoon() {
+        LocalDate today = LocalDate.now();
+        return !deadline.isBefore(today) && !deadline.isAfter(today.plusDays(3));
+    }
 }
