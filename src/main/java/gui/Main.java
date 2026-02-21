@@ -22,23 +22,18 @@ import seedu.mike.Mike;
  */
 public class Main extends Application {
 
-    private static String fileName = "./src/main/java/data/data.txt";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image userImage = new Image(
-            "https://cdn-icons-png.flaticon.com/512/9187/9187532.png");
-    private Image mikeImage = new Image(
-            "https://img.freepik.com/free-vector/chatbot-chat"
-                    + "-message-vectorart_78370-4104.jpg?semt=ais_hybrid&w=740&q=80");
-    private Mike mike = new Mike(fileName);
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image mikeImage = new Image(getClass().getResourceAsStream("/images/DaChat.png"));
+    private Mike mike = new Mike();
 
     @Override
     public void start(Stage stage) {
         // Setting up required components
-
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         sendButton = new Button("Send");
@@ -63,7 +58,7 @@ public class Main extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(585, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -73,9 +68,11 @@ public class Main extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(525.0);
 
         sendButton.setPrefWidth(55.0);
+
+        // Label for users
         Label messageLabel = new Label("Type 'hello' to understand the chatbot features");
         messageLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: gray;");
 
@@ -91,6 +88,9 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(messageLabel, 1.0);
         AnchorPane.setBottomAnchor(messageLabel, 30.0); // Adjust the value to position it below the input and button
 
+        DialogBox welcomeBox = new DialogBox(mike.getResponse("hello"), mikeImage);
+        welcomeBox.flip();
+        dialogContainer.getChildren().addAll(welcomeBox);
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, messageLabel);
 
         scene = new Scene(mainLayout);
