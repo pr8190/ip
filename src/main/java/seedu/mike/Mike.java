@@ -13,8 +13,21 @@ import exception.MikeException;
 public class Mike {
 
     /** The default file path for storing task data. */
-    protected static String fileName = "./src/main/java/data/data.txt";
+    protected static String fileName = "./src/main/resources/data/data.txt";
 
+    /** The hello message for users. */
+    protected static String helloMessage = "Hello! I am Mike - your personal chatbot for remembering tasks."
+            + " These are the basic functionalities I can perform : "
+            + "\n1. Adding todo tasks. Format : todo <task>"
+            + "\n2. Adding deadline tasks. Format : deadline <task> /by yyyy:MM:dd"
+            + "\n3. Adding event tasks. Format : event <task> /from yyyy:MM:dd HH:mm /to HH:mm"
+            + "\n4. Listing all the tasks. Format : list"
+            + "\n5. Marking a tasks done. Format : mark <number>"
+            + "\n6. Unmarking a task. Format : unmark <number>"
+            + "\n7. Deleting a task. Format : delete <number>"
+            + "\n8. Finding tasks that matches the inputted keyword. Format : find <keyword>"
+            + "\n9. Getting reminders for tasks that are due within the next 3 days. Format : reminder"
+            + "\n10. Exit. Format : bye";
     /** The user interface component for interacting with the user. */
     protected Ui ui;
 
@@ -30,7 +43,7 @@ public class Mike {
      *
      * @param fileName The path to the file where tasks are stored
      */
-    public Mike(String fileName) {
+    public Mike() {
         this.ui = new Ui();
         this.storage = new Storage(fileName);
         taskList = new TaskList(storage.readFromFile());
@@ -64,6 +77,8 @@ public class Mike {
                 ui.showMessage(taskList.delete(command));
             } else if (commandSplit[0].equals("find")) {
                 ui.showMessage(taskList.find(command));
+            } else if (commandSplit[0].equals("reminder")) {
+                ui.showMessage(taskList.reminders());
             } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
                     || commandSplit[0].equals("event")) {
                 // classifying tasks as todo, deadline or event and handling errors
@@ -97,7 +112,7 @@ public class Mike {
      *                               file
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        new Mike(fileName).run();
+        new Mike().run();
     }
 
     /**
@@ -113,17 +128,7 @@ public class Mike {
             ui.close();
             return "Bye. Hope to see you again soon!";
         } else if (command.equalsIgnoreCase("hi") || command.equalsIgnoreCase("hello")) {
-            return "Hello! I am Mike - your personal chatbot for remembering tasks."
-                    + " These are the basic functionalities I can perform : "
-                    + "\n1. Adding todo tasks format : todo <task>"
-                    + "\n2. Adding deadline tasks format : deadline <task> /by yyyy:MM:dd"
-                    + "\n3. Adding event tasks format : event <task> /from yyyy:MM:dd HH:mm /to HH:mm"
-                    + "\n4. Listing all the tasks format : list"
-                    + "\n5. Marking a tasks done format : mark <number>"
-                    + "\n6. Unmarking a task format : unmark <number>"
-                    + "\n7. Deleting a task format : delete <number>"
-                    + "\n8. Finding tasks that matches the inputted keyword format : find <keyword>"
-                    + "\n9. Exit format : bye";
+            return helloMessage;
         } else if (command.equals("list")) { // when user inputs 'list'
             return taskList.list();
         } else if (commandSplit[0].equals("mark")) { // when user asks to mark a particular task as done
@@ -134,6 +139,8 @@ public class Mike {
             return taskList.delete(command);
         } else if (commandSplit[0].equals("find")) {
             return taskList.find(command);
+        } else if (commandSplit[0].equals("reminder")) {
+            return taskList.reminders();
         } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
                 || commandSplit[0].equals("event")) {
             // classifying tasks as todo, deadline or event and handling errors
