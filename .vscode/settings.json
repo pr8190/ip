@@ -5,7 +5,11 @@
   ],
   "java.project.referencedLibraries": [],
   "cSpell.words": [
+    "azul",
     "dialogbox",
+    "javafx",
+    "johnrengelman",
+    "openjfx",
     "seedu",
     "semt",
     "Unmarking",

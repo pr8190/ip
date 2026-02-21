@@ -51,10 +51,6 @@ shadowJar {
     archiveFileName = 'mike.jar'
 }
 
-run{
-    standardInput = System.in
-}
-
 checkstyle {
     toolVersion = '11.0.0'
 }
