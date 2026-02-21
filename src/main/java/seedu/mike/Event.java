@@ -41,4 +41,15 @@ public class Event extends Task {
         return status + " event " + super.stringDescription() + " /from "
                 + start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + " /to " + end;
     }
+
+    /**
+     * Checks if the event is happening within the next 3 days.
+     *
+     * @return true if the event is scheduled to occur within the next 3 days, false
+     *         otherwise
+     */
+    public boolean isHappeningSoon() {
+        LocalDateTime now = LocalDateTime.now();
+        return !start.isBefore(now) && !start.isAfter(now.plusDays(3));
+    }
 }
