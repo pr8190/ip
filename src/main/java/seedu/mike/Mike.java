@@ -3,8 +3,6 @@ package seedu.mike;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import exception.MikeException;
-
 /**
  * The main class for the Mike chatbot application.
  * Mike is a task management chatbot that helps users track their todos,
@@ -13,7 +11,7 @@ import exception.MikeException;
 public class Mike {
 
     /** The default file path for storing task data. */
-    protected static String fileName = "./src/main/resources/data/data.txt";
+    protected static String fileName = "./data.txt";
 
     /** The hello message for users. */
     protected static String helloMessage = "Hello! I am Mike - your personal chatbot for remembering tasks."
@@ -60,7 +58,6 @@ public class Mike {
         ui.showWelcome();
         while (true) {
             String command = ui.readCommand();
-            // ArrayList<Task> tasks = taskList.loadTasks();
             String[] commandSplit = command.split(" ");
             if (command.equals("bye")) { // When user inputs 'bye'
                 storage.writeToFile(taskList.loadTasks());
@@ -80,22 +77,8 @@ public class Mike {
             } else if (commandSplit[0].equals("reminder")) {
                 ui.showMessage(taskList.reminders());
             } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
-                    || commandSplit[0].equals("event")) {
-                // classifying tasks as todo, deadline or event and handling errors
-                if (commandSplit.length <= 1) {
-                    ui.showMessage("OOPS!!! The description of a " + commandSplit[0]
-                            + " cannot be empty.\n");
-                    continue;
-                }
-                try {
-                    Task temTask = Task.classifyTask(command);
-                    assert temTask != null;
-                    taskList.add(temTask);
-                    ui.showMessage("Got it. I've added this task:\n" + temTask
-                            + "\nNow you have " + taskList.size() + " tasks in the list.\n");
-                } catch (MikeException mikeException) {
-                    ui.showMessage(mikeException.toString());
-                }
+                    || commandSplit[0].equals("event")) { // classifying tasks
+                ui.showMessage(taskList.classifyTask(command));
             } else {
                 ui.showMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
@@ -142,23 +125,8 @@ public class Mike {
         } else if (commandSplit[0].equals("reminder")) {
             return taskList.reminders();
         } else if (commandSplit[0].equals("todo") || commandSplit[0].equals("deadline")
-                || commandSplit[0].equals("event")) {
-            // classifying tasks as todo, deadline or event and handling errors
-            if (commandSplit.length <= 1) {
-                return "OOPS!!! The description of a " + commandSplit[0]
-                        + " cannot be empty.\n";
-            }
-            try {
-                Task temTask = Task.classifyTask(command);
-                if (temTask == null) {
-                    return "Oops!!! Looks like there is an error";
-                }
-                taskList.add(temTask);
-                return "Got it. I've added this task:\n" + temTask
-                        + "\nNow you have " + taskList.size() + " tasks in the list.\n";
-            } catch (MikeException mikeException) {
-                return mikeException.toString();
-            }
+                || commandSplit[0].equals("event")) { // classifying tasks
+            return taskList.classifyTask(command);
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }

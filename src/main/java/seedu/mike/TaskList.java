@@ -2,6 +2,8 @@ package seedu.mike;
 
 import java.util.ArrayList;
 
+import exception.MikeException;
+
 /**
  * Manages a list of tasks for the Mike chatbot.
  * This class handles operations such as adding, deleting, marking, and listing
@@ -197,5 +199,30 @@ public class TaskList {
             }
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * Classifies the task based on the command input and adds it to the task list.
+     *
+     * @param command The command string input by the user, which should start with
+     *                "todo", "deadline", or "event"
+     * @return A message indicating the added task and the new list size, or an
+     *         error message
+     */
+    public String classifyTask(String command) {
+        String[] commandSplit = command.split(" ");
+        if (commandSplit.length <= 1) {
+            return "OOPS!!! The description of a " + commandSplit[0]
+                    + " cannot be empty.\n";
+        }
+        try {
+            Task temTask = Task.classifyTask(command);
+            assert temTask != null;
+            this.add(temTask);
+            return "Got it. I've added this task:\n" + temTask
+                    + "\nNow you have " + this.size() + " tasks in the list.\n";
+        } catch (MikeException mikeException) {
+            return mikeException.toString();
+        }
     }
 }
